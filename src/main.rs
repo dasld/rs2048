@@ -1,38 +1,22 @@
-use std::ops/*::{Add, Sub}*/;
-use std::fmt/*::Display*/;
+pub mod utils;
+pub mod point;
 
-
-struct Point {
-    x: i32,
-    y: i32,
-}
-
-impl Point {
-    fn origin() -> Point {
-        Point { x: 0, y: 0 }
-    }
-}
-
-impl ops::Add for Point {
-    type Output = Self;
-
-    fn add(self, other: Self) -> Self {
-        Self { x: self.x + other.x, y: self.y + other.y }
-    }
-}
-
-impl fmt::Display for Point {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        // The `f` value implements the `Write` trait, which is what the
-        // write! macro is expecting. Note that this formatting ignores the
-        // various flags provided to format strings.
-        write!(f, "<<<{}, {}>>>", self.x, self.y)
-    }
-}
+use point::Point;
 
 
 fn main() {
-    let p = Point::origin() + Point { x: -14, y: 17 };
-    //println!("Hello: {},{}.", p.x, p.y);
-    println!("Hello: {}.", p);
+    let x = 14;
+    let y = 17;
+    /*
+    match Point::new(x, y) {
+	Ok(p) => println!("p is {}.", p),
+	Err(e) => println!("{}", e),
+	//let mut p = Point::new(-14, 17).unwrap();
+	//p.translate(8, 5);
+	//
+    }
+    */
+    let mut p = Point::new(x, y).unwrap();
+    p.translate(18, 18).unwrap();
+    println!("p is {}.", p);
 }
